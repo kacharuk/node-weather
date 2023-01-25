@@ -39,6 +39,14 @@ app.get("/help", (req, res) => {
   });
 });
 
+app.get("/show", (req, res) => {
+  res.render("show", {
+    title: "SHOW",
+    helpText: "Some helpful tips",
+    name: "Kacharuk M.",
+  });
+});
+
 app.get("/weather", (req, res) => {
   if (!req.query.address) {
     return res.send({

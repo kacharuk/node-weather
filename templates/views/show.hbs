@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+<script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script> 
+
+    
+    <script>
+      var audio = new Audio("https://cdn.glitch.global/476b7bc7-5e4a-4c57-8836-3d552dcbc502/hbd_song.mp3?v=1666182643686");
+      
+      document.addEventListener("DOMContentLoaded", function() {
+      const sceneEl = document.querySelector('a-scene');
+	    const arSystem = sceneEl.systems["mindar-image-system"];  
+      const exampleTarget = document.querySelector('#example-target');
+          exampleTarget.addEventListener("targetFound", event => {
+          audio.play();
+        });
+      	  exampleTarget.addEventListener("targetLost",  event => {
+	        audio.pause();
+	        });
+      });
+      
+      
+    </script>
+    
+    
+  </head>
+  <body>
+
+    <a-scene mindar-image="imageTargetSrc: https://storage.googleapis.com/yimyam_test_bucket_01/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    
+      <a-assets>
+    <!--    <img id="card" src="https://cdn.glitch.global/08df4cba-06da-4f6f-abe3-190f30b07d89/testQRAR.jpg?v=1667641060274" /> -->
+        <a-asset-item id="avatarModel" src="https://cdn.glitch.global/28d394ac-c7c3-488b-80ca-0d0192fd0bbc/asset.glb?v=1667032515012"></a-asset-item>
+
+        <audio id="sound" src="https://cdn.glitch.global/476b7bc7-5e4a-4c57-8836-3d552dcbc502/hbd_song.mp3?v=1666182643686" preload="auto"></audio>
+          
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      
+      
+      <a-entity id="example-target"  mindar-image-target="targetIndex: 0">
+      <!-- <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane> -->
+     
+           
+      <a-plane text-geometry="value: Happy Birthday;" align="center" anchor="center" material="color: #855731; src: #pixels; repeat: 0.5 0.5;" position="-0.25 0.25 0"  scale="0.1 0.1 0.1" rotation="0 360 0">	</a-plane>
+     <a-gltf-model opacity="0.75" rotation="0 0 0 " position="0 -0.25 0" scale="1 1 1" src="#avatarModel" >
+      </a-entity>
+    
+  
+        
+      <a-entity sound="src: #sound" autoplay="false"></a-entity>
+        
+
+    </a-scene>
+      
+    
+      
+   
+      
+      
+  </body>
+</html>
